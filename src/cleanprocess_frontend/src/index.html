@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>d gym - the new path to manage gym</title>
+		<link rel="icon" href="favicon.ico" />
+		<link rel="stylesheet" href="main.css" />
+	</head>
+	<body>
+		<div class="navbar">
+			<span class="logo">d gym</span>
+		</div>
+
+		<div style="padding: 0 1.2em; margin: .8em 0;">
+			<h1>Decentralized gym</h1>
+			<h2>Una nueva forma de administrar tu centro deportivo</h2>
+		</div>
+
+
+		<div class="midLy">
+			<div class="ly-card">
+				<span style="font-size: 1.2em;">Ir al panel de lectura</span>
+				<br>
+				<button type="button" id="abrir-lector" class="formBtn">IR</button>
+			</div>
+			<div class="ly-card">
+				<span style="font-size: 1.2em;">Ir al panel de edición</span>
+				<br>
+				<button type="button" id="abrir-editor" class="formBtn">IR</button>
+			</div>
+		</div>	
+
+
+		<div class="globalContainer" id="modal-lector">
+			<div class="modalContainer">
+
+				<div style="display: grid; padding: 8px 10px 0; margin-bottom: 15px;">
+					<strong>Panel de lectura</strong>
+					<br>
+					<span style="">
+						<button type="button" id="mostrar-btn" class="formBtn">mostrar</button>
+					</span>
+					<br>
+					<div class="profileList" id="perfiles-list"></div>
+				</div>
+
+
+				<div style="height: auto; padding-left: 10px;">
+					<span class="close" id="cerrar-lector">cerrar ventana</span>
+				</div>
+
+			</div>
+		</div>
+
+
+		<div class="globalContainer" id="modal-editor">
+			<div class="modalContainer">
+
+				<div style="padding: 10px 10px 0; display: flex; justify-content: space-between;">
+					<strong>Panel de edición</strong>
+					<span class="close" id="cerrar-editor">cerrar ventana</span>
+				</div>
+
+				<div class="grid">
+
+					<div class="child">
+						<form id="form-dos">
+							<label class="label">Crear perfil</label>
+							<input type="text" name="cr-nombre" class="input" placeholder="nombre" />
+							<input type="number" name="cr-edad" class="input" placeholder="edad" />
+							<input type="number" name="cr-peso" class="input" placeholder="peso" />
+							<input type="number" name="cr-estatura" class="input" placeholder="estatura" />
+							<input type="text" name="cr-programa" class="input" placeholder="programa" />
+							<button type="submit" class="formBtn">crear</button>
+						</form>
+					</div>
+
+
+					<div class="child">
+						<form id="form-tres">
+							<label class="label">Actualizar perfil</label>
+							<input type="number" name="upd-id-frt" class="input" placeholder="id del perfil a eliminar" />
+							<input type="text" name="upd-nombre" class="input" placeholder="nombre" />
+							<input type="number" name="upd-edad" class="input" placeholder="edad" />
+							<input type="number" name="upd-peso" class="input" placeholder="peso" />
+							<input type="number" name="upd-estatura" class="input" placeholder="estatura" />
+							<input type="text" name="upd-programa" class="input" placeholder="programa" />
+							<button type="submit" class="formBtn">actualizar</button>
+						</form>
+					</div>
+
+
+					<div class="child">
+						<form id="form-cuatro">
+							<label class="label">Eliminar perfil</label>
+							<input type="number" name="delete-id-frt" class="input" placeholder="id del perfil a eliminar" />
+							<button type="submit" class="formBtn">eliminar</button>
+						</form>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<script defer type="module" src="./index.js"></script>
+	</body>
+</html>
+
+
+
+
+

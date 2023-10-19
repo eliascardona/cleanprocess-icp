@@ -1,0 +1,29 @@
+{
+  "canisters": {
+    "cleanprocess_backend": {
+      "main": "src/cleanprocess_backend/main.mo",
+      "type": "motoko"
+    },
+    "cleanprocess_frontend": {
+      "dependencies": [
+        "cleanprocess_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/cleanprocess_frontend/src/index.html"
+      },
+      "source": [
+        "src/cleanprocess_frontend/assets",
+        "dist/cleanprocess_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
