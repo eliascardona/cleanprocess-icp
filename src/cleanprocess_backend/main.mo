@@ -5,26 +5,24 @@ import Iter "mo:base/Iter";
 
 actor cleanprocess {
 
-		stable var postId : Nat = 0;
+		stable var elementoId : Nat = 0;
 
-		type PerfilDeportivo = {
-			nombre: Text;
-			edad: Nat;
-			peso: Nat;
-			estatura: Nat;
-			programa: Text;
+		type miStruct = {
+			datoUno: Nat;
+			datoDos: Nat;
+			datoTres: Nat;
 		};
 
-		var perfiles = HashMap.HashMap<Nat16, PerfilDeportivo>(0, Nat.equal, Hash.hash);
+		var miArreglo = HashMap.HashMap<Nat, miStruct>(0, Nat.equal, Hash.hash);
 
 
-		public func crearPerfil (post : PerfilDeportivo) : async () {
+		public func crearPerfil (elemento : miStruct) : async () {
 
-			let id : Nat = postId;		// Creación de un `id` para cada post
-			postId+=1;					// Asignación del `id`
+			let id : Nat = elementoId;
+			elementoId+=1;
 
 
-			perfiles.put(id, post);		// Añadimos el post actual (perfil deportivo) al array
+			miArreglo.put(id, elemento);
 
 
 			return ();
@@ -32,50 +30,46 @@ actor cleanprocess {
 		};
 
 
-		public query func mostrarPerfiles () : async [(Nat, PerfilDeportivo)] {
+		public query func mostrarPerfiles () : async [(Nat, miStruct)] {
 
-			let perfilesIter : Iter.Iter<(Nat, PerfilDeportivo)> = perfiles.entries();
+			let miArregloIter : Iter.Iter<(Nat, miStruct)> = miArreglo.entries();
             
-			let perfilesArray : [(Nat, PerfilDeportivo)] = Iter.toArray(perfilesIter);
+			let arregloFormateado : [(Nat, miStruct)] = Iter.toArray(miArregloIter);
 
 
-			return perfilesArray;
-
-		};
-
-
-		public query func encontrarPerfil (id : Nat) : async ?PerfilDeportivo {
-
-			let postRes : ?PerfilDeportivo = perfiles.get(id);	// Query basada en el id
-
-
-			return postRes;
+			return arregloFormateado;
 
 		};
 
 
-		public func actualizarPerfil (post : PerfilDeportivo, id : Nat) : async Text {
+		public query func encontrarPerfil (id : Nat) : async ?miStruct {
 
-			let pquery : ?PerfilDeportivo = perfiles.get(id);	// Query basada en el id
+			let elementoRes : ?miStruct = miArreglo.get(id);
 
+			return elementoRes;
+
+		};
+
+
+		public func actualizarDatos (elemento : miStruct, id : Nat) : async Text {
+
+			let pquery : ?miStruct = miArreglo.get(id);
 
 			switch (pquery) {
 				case (null) {
-					return "El perfil que deseas editar no existe";
+					return "El dato que deseas editar no existe";
 				};
 
-				case (?currentPost) {
-					let nuevoPerfil : PerfilDeportivo = {
-						nombre = post.nombre;
-						edad = post.edad;
-						peso = post.peso;
-						estatura = post.estatura;
-						programa = post.programa;
+				case (?currentelemento) {
+					let nuevaInfo : miStruct = {
+						datoUno = elemento.datoUno;
+						datoDos = elemento.datoDos;
+						datoTres = elemento.datoTres;
 					};
 
-					perfiles.put(id, nuevoPerfil);
+					miArreglo.put(id, nuevaInfo);
 
-					return "Perfil actualizado exitosamente";
+					return "dato actualizado exitosamente";
 				};
 
 			};
@@ -83,19 +77,19 @@ actor cleanprocess {
 		};
 
  
-		public func eliminarPerfil (id : Nat) : async Text {
+		public func eliminarDato (id : Nat) : async Text {
 
-			let pquery : ?PerfilDeportivo = perfiles.get(id);	// Query basada en el id
+			let pquery : ?miStruct = miArreglo.get(id);
         
 			switch (pquery) {
 				case (null) {
-					return "El perfil que deseas editar no existe";
+					return "El dato que deseas editar no existe";
 				};
 
 				case (_) {
-					ignore perfiles.remove(id);
+					ignore miArreglo.remove(id);
 
-					return "Perfil eliminado exitosamente";
+					return "dato eliminado exitosamente";
 				};
 
 			};
